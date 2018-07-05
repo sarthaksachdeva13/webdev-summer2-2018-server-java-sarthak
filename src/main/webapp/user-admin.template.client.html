@@ -1,66 +1,77 @@
 <html>
 <head>
     <title>User Admin</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Markazi+Text" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
-<h1>User Admin</h1>
 
-<table border="1px">
-    <thead>
-    <tr>
-        <th>Username</th>
-        <th>Password</th>
-        <th>First Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>&nbsp;</th>
-    </tr>
-    <tr>
-        <th><input/></th>
-        <th><input/></th>
-        <th><input/></th>
-        <th><input/></th>
-        <th>
-            <select>
-                <option value="faculty">
-                    Faculty
-                </option>
-                <option value="student">
-                    Student
-                </option>
-            </select>
-        </th>
-        <th>
-            <button>Update</button>
-            <button>Create</button>
-        </th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>
-            Alice
-        </td>
-        <td>
-            ***
-        </td>
-        <td>
-            Wonderland
-        </td>
-        <td>
-            alice@wonderland
-        </td>
-        <td>
-            Faculty
-        </td>
-        <td>
-            <button>Delete</button>
-            <button>Edit</button>
-        </td>
-    </tr>
-    </tbody>
-</table>
+<h1 class="headingFont">User Admin</h1>
 
-
+<div class="container adminTable">
+    <table class="table">
+        <thead>
+        <tr id="tableRowHeading">
+            <th scope="col">Username</th>
+            <th scope="col">Password</th>
+            <th scope="col">First Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Role</th>
+            <th scope="col">&nbsp;</th>
+        </tr>
+        <tr>
+            <th><input class="form-control"/></th>
+            <th><input class="form-control"/></th>
+            <th><input class="form-control"/></th>
+            <th><input class="form-control"/></th>
+            <th>
+                <select class="form-control">
+                    <option value="faculty">
+                        Faculty
+                    </option>
+                    <option value="student">
+                        Student
+                    </option>
+                </select>
+            </th>
+            <th>
+                <span>
+                    <i class="fa-2x fas fa-search"></i>
+                </span>
+                <span>
+                    <i class="fa-2x fas fa-plus-circle"></i>
+                </span>
+                <span>
+                    <i class="fa-2x fas fa-check"></i>
+                </span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr id="rowItems">
+            <td>Alice</td>
+            <td>***</td>
+            <td>Wonderland</td>
+            <td>alice@wonderland</td>
+            <td>Faculty</td>
+            <td>
+                <span>
+                    <i class="fa-2x fas fa-trash-alt"></i>
+                </span>
+                <span>
+                    <i class="fa-2x fas fa-edit"></i>
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

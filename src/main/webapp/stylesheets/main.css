@@ -1,0 +1,47 @@
+h1 {
+    text-align: center;
+    color : rgb(139,0,0);
+    padding-top: 10px;
+    padding-bottom: 20px;
+}
+
+.headingFont {
+    font-family: 'Amatic SC', cursive;
+    font-size: 55px;
+    font-weight: bold;
+
+}
+
+#login
+{
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+#register
+{
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+}
+
+table{
+    text-align: center;
+}
+
+
+.adminTable{
+    font-family: 'Markazi Text', serif;
+    font-size: 55px;
+}
+
+#tableRowHeading{
+     font-size: 30px;
+ }
+
+#rowItems{
+    font-family: 'Quicksand', sans-serif;
+    font-size: 18px;
+
+}

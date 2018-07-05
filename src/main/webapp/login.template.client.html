@@ -1,41 +1,56 @@
 <html>
 <head>
     <title>Login</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/main.css">
 </head>
 <body>
-<h1>Login</h1>
+<h1 class="headingFont">Login</h1>
+<div class="container" id="login">
+    <!--<div class="row">-->
+        <div class="form-group">
+            <div class="form-group">
+                <label for="username">
+                    Username
+                </label>
+                <div class="form-group">
+                    <input id="username"
+                           class="form-control"
+                           placeholder="Alice"/>
+                </div>
 
-<div>
-    <label for="username">
-        Username
-    </label>
-    <input id="username"
-           placeholder="Alice"/>
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+                    <input id="password"
+                           class="form-control"
+                           placeholder="1234qwerty"
+                           type="password"/>
+                </div>
+
+                <div id="container" class="form-group">
+                    <button class="btn btn-primary btn-block">
+                        Login
+                    </button>
+                </div>
+
+                <div>
+                    <label>
+                        Not yet registered?
+                    </label>
+                    <a href="register.template.client.html">
+                        Sign Up!
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    <!--</div>-->
 </div>
-
-<div>
-    <label for="password">
-        Password
-    </label>
-    <input id="password"
-           placeholder="1234qwerty"
-           type="password"/>
-</div>
-
-<div>
-    <button>
-        Login
-    </button>
-</div>
-
-<div>
-    <label>
-        Not yet registered?
-    </label>
-    <a href="register.template.client.html">
-        Sign Up!
-    </a>
-</div>
-
 </body>
 </html>

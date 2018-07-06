@@ -9,7 +9,7 @@
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link href="user-admin.style.client.css" rel="stylesheet" />
+    <link href="user-admin.style.client.css" rel="stylesheet"/>
     <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
@@ -30,13 +30,13 @@
             <th scope="col">Role</th>
             <th scope="col">&nbsp;</th>
         </tr>
-        <tr>
-            <td><input class="form-control" required="true" placeholder="Username"/></td>
-            <td><input class="form-control" required="true" placeholder="Password"/></td>
-            <td><input class="form-control" required="true" placeholder="First Name"/></td>
-            <td><input class="form-control" required="true" placeholder="Email"/></td>
+        <tr class="wbdv-form">
+            <td><input id="UsernameFld" class="form-control" required="true" placeholder="Username"/></td>
+            <td><input id="PasswordFld" class="form-control" required="true" placeholder="Password"/></td>
+            <td><input id="FirstNameFld" class="form-control" required="true" placeholder="First Name"/></td>
+            <td><input id="EmailFld" class="form-control" required="true" placeholder="Email"/></td>
             <td>
-                <select id="selectOptions" class="form-control">
+                <select id="roleFld" class="form-control">
                     <option value="Faculty">
                         Faculty
                     </option>
@@ -46,30 +46,24 @@
                 </select>
             </td>
             <td>
-                <span>
+                <span class="float-right" style="white-space: nowrap">
                     <i class="fa-2x fas fa-search"></i>
-                </span>
-                <span>
                     <i class="fa-2x fas fa-plus-circle"></i>
-                </span>
-                <span>
                     <i class="fa-2x fas fa-check"></i>
                 </span>
             </td>
         </tr>
         </thead>
-        <tbody>
-        <tr id="rowItems">
+        <tbody class="wbdv-tbody">
+        <tr id="rowItems" class="wbdv-template wbdv-user wbdv-hidden">
             <td>Alice</td>
             <td>***</td>
             <td>Wonderland</td>
             <td>alice@wonderland</td>
             <td>Faculty</td>
             <td>
-                <span>
+                <span class="float-right">
                     <i class="fa-2x fas fa-trash-alt"></i>
-                </span>
-                <span>
                     <i class="fa-2x fas fa-edit"></i>
                 </span>
             </td>

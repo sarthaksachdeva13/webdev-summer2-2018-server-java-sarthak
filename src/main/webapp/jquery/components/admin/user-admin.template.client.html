@@ -1,23 +1,23 @@
+<!DOCTYPE html>
 <html>
 <head>
     <title>User Admin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Markazi+Text" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link href="user-admin.style.client.css" rel="stylesheet" />
 </head>
-<body>
+<body background="http://blog.somethingpeach.com/wp-content/uploads/wallpaper_007_2560x1440.jpg">
 
-<h1 class="headingFont">User Admin</h1>
+<h1 class="userAdminHeading">User Admin</h1>
 
-<div class="container adminTable">
+<div class="container">
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr id="tableRowHeading">
             <th scope="col">Username</th>
             <th scope="col">Password</th>
@@ -27,21 +27,21 @@
             <th scope="col">&nbsp;</th>
         </tr>
         <tr>
-            <th><input class="form-control"/></th>
-            <th><input class="form-control"/></th>
-            <th><input class="form-control"/></th>
-            <th><input class="form-control"/></th>
-            <th>
-                <select class="form-control">
-                    <option value="faculty">
+            <td><input class="form-control" required="true" placeholder="Username"/></td>
+            <td><input class="form-control" required="true" placeholder="Password"/></td>
+            <td><input class="form-control" required="true" placeholder="First Name"/></td>
+            <td><input class="form-control" required="true" placeholder="Email"/></td>
+            <td>
+                <select id="selectOptions" class="form-control">
+                    <option value="Faculty">
                         Faculty
                     </option>
-                    <option value="student">
+                    <option value="Student">
                         Student
                     </option>
                 </select>
-            </th>
-            <th>
+            </td>
+            <td>
                 <span>
                     <i class="fa-2x fas fa-search"></i>
                 </span>
@@ -51,7 +51,7 @@
                 <span>
                     <i class="fa-2x fas fa-check"></i>
                 </span>
-            </th>
+            </td>
         </tr>
         </thead>
         <tbody>

@@ -14,3 +14,13 @@ h1 {
     width: 30%;
     margin: 0 auto;
 }
+
+.labelNames
+{
+    color : rgb(0,100,0);
+    font-size: 24px;
+    font-family: 'Gaegu', cursive;
+    float:left;
+
+}
+

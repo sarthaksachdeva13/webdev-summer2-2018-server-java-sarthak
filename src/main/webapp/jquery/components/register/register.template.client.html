@@ -4,56 +4,16 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gaegu" rel="stylesheet">
     <link href="register.style.client.css" rel="stylesheet"/>
 </head>
 <body background="http://blog.somethingpeach.com/wp-content/uploads/wallpaper_007_2560x1440.jpg">
 <h1 class="headingFont">Register</h1>
 <div class="container" id="register">
-    <!--First Name-->
-    <div class="form-group">
-        <label for="firstName">
-            First Name
-        </label>
-        <input id="firstName"
-               class="form-control"
-               placeholder="Enter your First Name"/>
-    </div>
-
-    <!--Last Name-->
-    <div class="form-group">
-        <label for="lastName">
-            Last Name
-        </label>
-        <input id="lastName"
-               class="form-control"
-               placeholder="Enter your Last Name"/>
-    </div>
-
-    <!--Email-->
-    <div class="form-group">
-        <label for="email">
-            Email
-        </label>
-        <input id="email"
-               class="form-control"
-               placeholder="Enter your email"/>
-    </div>
-
-    <div class="form-group">
-        <label for="phoneNo">
-            Phone Number
-        </label>
-        <input id="phoneNo"
-               class="form-control"
-               placeholder="Enter your Phone Number"/>
-    </div>
-
 
     <!--Username-->
     <div class="form-group">
-        <label for="username">
-            Username
-        </label>
+        <label class="labelNames" for="username">Username</label>
         <input id="username"
                class="form-control"
                placeholder="Choose a Username"/>
@@ -61,9 +21,7 @@
 
     <!--Password-->
     <div class="form-group">
-        <label for="password">
-            Password
-        </label>
+        <label class="labelNames" for="password">Password</label>
         <input id="password"
                class="form-control"
                placeholder="1234qwerty"
@@ -72,9 +30,7 @@
 
     <!--Validate Password-->
     <div class="form-group">
-        <label for="password2">
-            Validate Password
-        </label>
+        <label class="labelNames" for="password2">Validate Password</label>
         <input id="password2"
                class="form-control"
                placeholder="1234qwerty"
@@ -82,7 +38,7 @@
     </div>
 
     <!--Button-->
-    <div id="container" class="form-group">
+    <div class="form-group">
         <button id="registerBtn" class="btn btn-primary btn-block">
             Register
         </button>
@@ -96,7 +52,6 @@
             Log in!
         </a>
     </div>
-</div>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.3.1.min.js"

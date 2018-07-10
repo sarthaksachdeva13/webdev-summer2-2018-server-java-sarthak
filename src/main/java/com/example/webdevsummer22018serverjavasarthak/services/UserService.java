@@ -1,7 +1,7 @@
 package com.example.webdevsummer22018serverjavasarthak.services;
 
 import com.example.webdevsummer22018serverjavasarthak.models.User;
-import com.example.webdevsummer22018serverjavasarthak.repositories.UserRespository;
+import com.example.webdevsummer22018serverjavasarthak.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,15 +16,20 @@ public class UserService {
 
 
     @Autowired
-    UserRespository userRespository;
+    UserRepository userRepository;
 
     @PostMapping("/register")
     public User register(@RequestBody User user) {
-        return userRespository.save(user);
+        return userRepository.save(user);
+    }
+
+    @PostMapping("/login")
+    public User login(@RequestBody User user) {
+        return userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
     }
 
     @GetMapping("/api/user")
     public List<User> findAllUsers() {
-        return (List<User>) userRespository.findAll();
+        return (List<User>) userRepository.findAll();
     }
 }

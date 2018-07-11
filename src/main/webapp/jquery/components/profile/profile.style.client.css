@@ -25,6 +25,12 @@ h1 {
 }
 
 #updateBtn
+ {
+     margin-left: 220px;
+     width: 30%;
+ }
+
+#logoutBtn
 {
     margin-left: 220px;
     width: 30%;

@@ -8,10 +8,9 @@
         $("#registerBtn").click(register);
     }
 
-    function register(event) {
-        event.preventDefault();
-        var username = $("#usernameFld").val();
-        var password = $("#passwordFld").val();
+    function register() {
+        var username = $("#username").val();
+        var password = $("#password").val();
         var password2 = $("#password2").val();
 
         var user =

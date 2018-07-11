@@ -1,32 +1,28 @@
 (function () {
-    var $username,
-        $password,
-        $loginBtn;
-    var userService = new UserServiceClient();
-    function init() {
-        $username = $('#username');
-        $password = $('#password');
-        $loginBtn = $('#loginBtn');
 
-        $loginBtn.click(login);
+    $(main)
+
+    var userServiceClient = new UserServiceClient();
+
+    function main() {
+
+        $("#loginBtn").click(login);
+
     }
-    init();
 
     function login() {
-        $(".alert").hide()
+        var username = $("#username").val();
+        var password = $("#password").val();
+
         var user = {
-            'username': $username.val(),
-            "password": $password.val()
+            "username":username,
+            "password":password
         };
-        userService.login(user).then(navigateToProfile,loginFailed);
-    }
 
-    function navigateToProfile() {
-        window.location.href = '../profile/profile.template.client.html';
-    }
-
-    function loginFailed() {
-        $(".alert").show("slow")
-        // alert('Username and password does not match!');
+        userServiceClient
+            .login(user)
+            .then(function (response) {
+                window.location.href = "../profile/profile.template.client.html";
+            });
     }
 })();

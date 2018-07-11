@@ -27,7 +27,8 @@
             headers:
                 {
                     'Content-type': 'application/json'
-                }
+                },
+            'credentials': 'include'
         }).then(registrationSuccessful, registrationFailed);
 
         function registrationSuccessful() {

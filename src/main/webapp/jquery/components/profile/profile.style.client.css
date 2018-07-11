@@ -4,14 +4,14 @@ h1 {
     padding-top: 10px;
     padding-bottom: 20px;
     font-family: 'Amatic SC', cursive;
-    font-size: 54px;
+    font-size: 55px;
     font-weight: bold;
 }
 
-#register
+#profile
 {
     align-items: center;
-    width: 30%;
+    width: 31%;
     margin: 0 auto;
 }
 
@@ -23,5 +23,3 @@ h1 {
     float:left;
 
 }
-
-

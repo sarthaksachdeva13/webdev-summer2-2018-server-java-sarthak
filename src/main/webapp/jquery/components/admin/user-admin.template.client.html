@@ -10,67 +10,77 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
           integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
     <link href="user-admin.style.client.css" rel="stylesheet"/>
-    <script
-            src="https://code.jquery.com/jquery-3.3.1.min.js"
-            integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-            crossorigin="anonymous">
-    </script>
+    <link href="../../../styles.css" rel="stylesheet"/>
 </head>
-<body background="http://blog.somethingpeach.com/wp-content/uploads/wallpaper_007_2560x1440.jpg">
-
-<h1 class="userAdminHeading">User Admin</h1>
-
-<div class="container">
-    <table class="table">
-        <thead class="thead-dark">
-        <tr id="tableRowHeading">
-            <th scope="col">Username</th>
-            <th scope="col">Password</th>
-            <th scope="col">First Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Role</th>
-            <th scope="col">&nbsp;</th>
-        </tr>
-        <tr class="wbdv-form">
-            <td><input id="UsernameFld" class="form-control" required="true" placeholder="Username"/></td>
-            <td><input id="PasswordFld" class="form-control" required="true" placeholder="Password"/></td>
-            <td><input id="FirstNameFld" class="form-control" required="true" placeholder="First Name"/></td>
-            <td><input id="EmailFld" class="form-control" required="true" placeholder="Email"/></td>
-            <td>
-                <select id="roleFld" class="form-control">
-                    <option value="Faculty">
-                        Faculty
-                    </option>
-                    <option value="Student">
-                        Student
-                    </option>
-                </select>
-            </td>
-            <td>
-                <span class="float-right" style="white-space: nowrap">
-                    <i class="fa-2x fas fa-search"></i>
+<body>
+<h1>User Admin</h1>
+<div class="container-fluid">
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="thead-dark">
+            <tr id="tableRowHeading">
+                <th scope="col">Username</th>
+                <th scope="col">Password</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">DOB</th>
+                <th scope="col">Role</th>
+                <th scope="col">&nbsp;</th>
+            </tr>
+            <tr class="wbdv-form">
+                <td><input id="UsernameFld" class="form-control" required="true" placeholder="Username"/></td>
+                <td><input id="PasswordFld" class="form-control" required="true" placeholder="Password"/></td>
+                <td><input id="FirstNameFld" class="form-control" required="true" placeholder="First Name"/></td>
+                <td><input id="LastNameFld" class="form-control" required="true" placeholder="Last Name"/></td>
+                <td><input id="EmailFld" class="form-control" required="true" placeholder="Email"/></td>
+                <td><input id="PhoneFld" class="form-control" required="true" placeholder="Phone"/></td>
+                <td><input id="DOBFld" class="form-control" type="date" required="true" placeholder="DOB"/></td>
+                <td>
+                    <select id="roleFld" class="form-control">
+                        <option value="Faculty">
+                            Faculty
+                        </option>
+                        <option value="Student">
+                            Student
+                        </option>
+                    </select>
+                </td>
+                <td>
+                <span class="float-right wbdv_fontawesome">
                     <i class="fa-2x fas fa-plus-circle"></i>
                     <i class="fa-2x fas fa-check"></i>
                 </span>
-            </td>
-        </tr>
-        </thead>
-        <tbody class="wbdv-tbody">
-        <tr id="rowItems" class="wbdv-template wbdv-user wbdv-hidden">
-            <td>Alice</td>
-            <td>***</td>
-            <td>Wonderland</td>
-            <td>alice@wonderland</td>
-            <td>Faculty</td>
-            <td>
+                </td>
+            </tr>
+            </thead>
+            <tbody class="wbdv-tbody">
+            <tr id="rowItems" class="wbdv-template wbdv-user wbdv-hidden">
+                <td id="templateUsername">alicewonder</td>
+                <td id="templatePassword">***</td>
+                <td id="templateFirstName">Alice</td>
+                <td id="templateLastName">Wonderland</td>
+                <td id="templateEmail">alice@wonderland</td>
+                <td id="templatePhone">857xxxxxxx</td>
+                <td id="templateDOB">11-13-1993</td>
+                <td>Faculty</td>
+                <td>
                 <span class="float-right">
-                    <i class="fa-2x fas fa-trash-alt"></i>
-                    <i class="fa-2x fas fa-edit"></i>
+                    <i class="fa-2x fas fa-trash-alt deleteIcon"></i>
+                    <i class="fa-2x fas fa-edit editIcon"></i>
                 </span>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+<script src="../../services/user.service.client.js"></script>
+<script src="user-admin.controller.client.js"></script>
 </body>
 </html>

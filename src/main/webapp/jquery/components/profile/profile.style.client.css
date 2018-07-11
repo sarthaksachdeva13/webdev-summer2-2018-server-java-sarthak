@@ -11,7 +11,7 @@ h1 {
 #profile
 {
     align-items: center;
-    width: 31%;
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -22,4 +22,10 @@ h1 {
     font-family: 'Dosis', sans-serif;
     float:left;
 
+}
+
+#updateBtn
+{
+    margin-left: 220px;
+    width: 30%;
 }

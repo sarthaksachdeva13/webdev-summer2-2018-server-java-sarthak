@@ -2,37 +2,31 @@
     var $username,
         $password,
         $loginBtn;
-
+    var userService = new UserServiceClient();
     function init() {
         $username = $('#username');
         $password = $('#password');
         $loginBtn = $('#loginBtn');
+
         $loginBtn.click(login);
     }
     init();
 
     function login() {
-
+        $(".alert").hide()
         var user = {
-            "username" : $username.val(),
-            "password" : $password.val()
+            'username': $username.val(),
+            "password": $password.val()
         };
-
-        fetch('/login', {
-            method : 'post',
-            body : JSON.stringify(user),
-            credentials: 'include',
-            headers : {
-                'content-type' : 'application/json'
-            }
-
-        }).then(navigateToProfile);
+        userService.login(user).then(navigateToProfile,loginFailed);
     }
 
     function navigateToProfile() {
-        window.location.href = ('/jquery/components/profile/profile.template.client.html');
-
+        window.location.href = '../profile/profile.template.client.html';
     }
 
-
+    function loginFailed() {
+        $(".alert").show("slow")
+        // alert('Username and password does not match!');
+    }
 })();

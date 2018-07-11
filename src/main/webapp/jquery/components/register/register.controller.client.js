@@ -1,42 +1,30 @@
 (function () {
-    var registerBtn = $('#registerBtn');
-    registerBtn.click(registerHandler);
 
-    var usernameFld = $('#username');
-    var passwordFld = $('#password');
-    var password2Fld = $('#password2');
+    $(init)
 
+    var userServiceClient = new UserServiceClient();
 
-    function registerHandler() {
-        var usernameStr = usernameFld.val();
-        var passwordStr = passwordFld.val();
-        var password2Str = password2Fld.val();
-
-
-        var userObj = {
-            username: usernameStr,
-            password: passwordStr,
-            password2: password2Str
-        }
-
-        var userObjStr = JSON.stringify(userObj);
-
-        fetch('/register', {
-            method: 'post',
-            body: userObjStr,
-            headers:
-                {
-                    'Content-type': 'application/json'
-                },
-            'credentials': 'include'
-        }).then(registrationSuccessful, registrationFailed);
-
-        function registrationSuccessful() {
-            window.location.href = ('/jquery/components/profile/profile.template.client.html');
-        }
-
-        function registrationFailed() {
-            alert('oops');
-        }
+    function init() {
+        $("#registerBtn").click(register);
     }
+
+    function register(event) {
+        event.preventDefault();
+        var username = $("#usernameFld").val();
+        var password = $("#passwordFld").val();
+        var password2 = $("#password2").val();
+
+        var user =
+            {
+                "username": username,
+                "password": password,
+                "password2": password2
+            };
+
+        userServiceClient.register(user)
+            .then(function(response) {
+                window.location.href = "../profile/profile.template.client.html";
+            });
+    }
+
 })();

@@ -21,6 +21,10 @@ public class User {
     private String role;
     private Date dateOfBirth;
 
+    public User() {
+        super();
+    }
+
     public Integer getId() {
         return id;
     }

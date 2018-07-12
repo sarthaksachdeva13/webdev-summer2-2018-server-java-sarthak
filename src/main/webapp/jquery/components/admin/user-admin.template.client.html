@@ -21,11 +21,9 @@
             <tr id="tableRowHeading">
                 <th scope="col">Username</th>
                 <th scope="col">Password</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">DOB</th>
                 <th scope="col">Role</th>
                 <th scope="col">&nbsp;</th>
             </tr>
@@ -35,8 +33,6 @@
                 <td><input id="FirstNameFld" class="form-control" required="true" placeholder="First Name"/></td>
                 <td><input id="LastNameFld" class="form-control" required="true" placeholder="Last Name"/></td>
                 <td><input id="EmailFld" class="form-control" required="true" placeholder="Email"/></td>
-                <td><input id="PhoneFld" class="form-control" required="true" placeholder="Phone"/></td>
-                <td><input id="DOBFld" class="form-control" type="date" required="true" placeholder="DOB"/></td>
                 <td>
                     <select id="roleFld" class="form-control">
                         <option value="Faculty">
@@ -49,8 +45,8 @@
                 </td>
                 <td>
                 <span class="float-right wbdv_fontawesome">
-                    <i class="fa-2x fas fa-plus-circle"></i>
-                    <i class="fa-2x fas fa-check"></i>
+                    <i class="fa-2x fas fa-plus-circle addIcon"></i>
+                    <i class="fa-2x fas fa-check updateIcon"></i>
                 </span>
                 </td>
             </tr>
@@ -62,11 +58,9 @@
                 <td id="templateFirstName">Alice</td>
                 <td id="templateLastName">Wonderland</td>
                 <td id="templateEmail">alice@wonderland</td>
-                <td id="templatePhone">857xxxxxxx</td>
-                <td id="templateDOB">11-13-1993</td>
-                <td>Faculty</td>
+                <td id="templateRole">Faculty</td>
                 <td>
-                <span class="float-right">
+                <span class="float-right wbdv_fontawesome">
                     <i class="fa-2x fas fa-trash-alt deleteIcon"></i>
                     <i class="fa-2x fas fa-edit editIcon"></i>
                 </span>

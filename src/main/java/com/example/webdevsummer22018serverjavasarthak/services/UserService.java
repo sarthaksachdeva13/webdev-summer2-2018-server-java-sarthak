@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Optional;
 
 
@@ -17,84 +16,101 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    @PostMapping("/api/register")
-    public User register(@RequestBody User user, HttpSession session) {
-        User currentUser = userRepository.save(user);
-        session.setAttribute("currentUser", currentUser);
-        return currentUser;
-    }
-
-    @GetMapping("/api/profile")
-    public Optional<User> profile(HttpSession session)
-    {
-        User currentUser = (User) session.getAttribute("currentUser");
-        return userRepository.findById(currentUser.getId());
-    }
-
-
-    @PostMapping("/api/login")
-    public User login(@RequestBody User user, HttpSession session) {
-        user = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
-        session.setAttribute("currentUser", user);
-        return user;
-    }
-
-
-    @PutMapping("/api/user/{userId}")
-    public User updateUser(@PathVariable("userId") int id, @RequestBody User newUser) {
-        Optional<User> optional = userRepository.findById(id);
-        if(optional.isPresent()) {
-            User user = optional.get();
-            user.setFirstName(newUser.getFirstName());
-            user.setLastName(newUser.getLastName());
-            user.setUsername(newUser.getUsername());
-            if (newUser.getPassword() != null) {
-                user.setPassword(user.getPassword());
-            }
-            user.setPhoneNo(newUser.getPhoneNo());
-            user.setRole(newUser.getEmail());
-            user.setEmail(newUser.getEmail());
-            user.setDateOfBirth(newUser.getDateOfBirth());
-            return userRepository.save(user);
-        }
-        return null;
-    }
-
-
-    @PutMapping("/api/profile")
-    public User updateProfile(@RequestBody User newUser) {
-        Optional<User> optional = userRepository.findById(newUser.getId());
-        if (optional.isPresent()) {
-            User updatedUser = optional.get();
-            updatedUser.setUsername(newUser.getUsername());
-            updatedUser.setPhoneNo(newUser.getPhoneNo());
-            updatedUser.setRole(newUser.getRole());
-            updatedUser.setEmail(newUser.getEmail());
-            updatedUser.setDateOfBirth(newUser.getDateOfBirth());
-            return userRepository.save(updatedUser);
-        }
-        return null;
-    }
-
-    @GetMapping("/api/user/{userId}")
-    public Optional<User> findUserById(@PathVariable("userId") String userId){
-        int id = Integer.parseInt(userId);
-        return userRepository.findById(id);
-    }
-
-
-    @DeleteMapping("/api/user/{userId}")
-    public void deleteUser(@PathVariable("userId") int id) {
-        userRepository.deleteById(id);
-    }
-
     @GetMapping("/api/user")
-    public List<User> findAllUsers() {
-        return (List<User>) userRepository.findAll();
+    public Iterable<User> findAllUsers(){
+        return userRepository.findAll();
     }
+
 
     @PostMapping("/api/user")
     public User createUser(@RequestBody User user) {
         return userRepository.save(user);
     }
+
+    @DeleteMapping("/api/user/{userId}")
+    public void deleteUser(@PathVariable("userId") int id)
+    {
+        userRepository.deleteById(id);
+    }
+
+    @GetMapping("/api/user/{userId}")
+    public User findUserById(@PathVariable("userId") int id)
+    {
+        Optional<User> optional = userRepository.findById(id);
+        return optional.orElse(null);
+
+    }
+
+    @PutMapping("/api/user/{userId}")
+    public User updateUser(@PathVariable("userId") int id,@RequestBody User user) {
+        Optional<User> optional = userRepository.findById(id);
+        if(optional.isPresent())
+        {
+
+            User usr = optional.get();
+            System.out.println("User ID # " + usr.getId());
+            usr.setFirstName(user.getFirstName());
+            usr.setLastName(user.getLastName());
+            usr.setPassword(user.getPassword());
+            usr.setRole(user.getRole());
+            usr.setUsername(user.getUsername());
+            userRepository.save(usr);
+            return userRepository.findById(id).get();
+        }
+        return null;
+    }
+
+
+    private Iterable<User> findUserByUsername(@RequestParam(name = "username", required = false) String username)
+    {
+        return  userRepository.findUserByUserName(username);
+    }
+
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user,HttpSession session) {
+
+        Iterable<User> currentUser = findUserByUsername(user.getUsername());
+        if (!currentUser.iterator().hasNext())
+        {
+            User registeredUser = createUser(user);
+            session.setAttribute("currentUser", registeredUser);
+            return userRepository.findById(registeredUser.getId()).get();
+        }
+        return null;
+    }
+
+    @PostMapping("/api/login")
+    public User login(@RequestBody User user,HttpSession session)
+    {
+        Iterable<User> currentUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
+        if (currentUser.iterator().hasNext()){
+            User curUser = currentUser.iterator().next();
+            session.setAttribute("currentUser", curUser);
+            return userRepository.findById(curUser.getId()).get();
+        }
+        return null;
+    }
+
+    @GetMapping("/api/profile")
+    public User profile(HttpSession session) {
+        User currentUser = (User) session.getAttribute("currentUser");
+        return userRepository.findById(currentUser.getId()).get();
+    }
+
+    @PutMapping("/api/profile")
+    public User updateProfile(@RequestBody User user, HttpSession session) {
+        User currentUser =  (User) session.getAttribute("currentUser");
+        user.setId(currentUser.getId());
+        user.setPassword(currentUser.getPassword());
+        userRepository.save(user);
+        return findUserById(user.getId());
+    }
+
+    @PostMapping("/api/logout")
+    public User logout(HttpSession session) {
+        session.invalidate();
+        return null;
+
+    }
+
 }

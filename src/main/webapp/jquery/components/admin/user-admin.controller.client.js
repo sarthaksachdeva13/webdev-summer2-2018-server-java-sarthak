@@ -1,94 +1,128 @@
+
 (function () {
-    jQuery(main);
-    var tbody = $('tbody');
-    var tableTemplate = $('.wbdv-template');
-    var inputFormGroup = $('.wbdv-form');
+    $(main);
+    var tbody;
+    var template;
+    var currentUserId;
     var userServiceClient = new UserServiceClient();
 
     function main() {
+        tbody = $("tbody");
+        template = $(".wbdv-template");
+        findAllUsers();
+        $(".addIcon").click(createUser);
+        $(".updateIcon").click(updateUser);
+    }
+
+    function findAllUsers() {
         userServiceClient
             .findAllUsers()
             .then(renderUsers);
     }
 
+    function updateUser() {
+        var username = $("#UsernameFld").val();
+        var password = $("#PasswordFld").val();
+        var firstName =$("#FirstNameFld").val();
+        var lastName = $("#LastNameFld").val();
+        var role = $("#roleFld").val();
+
+        var user ={
+            username:username,
+            password:password,
+            firstName:firstName,
+            lastName:lastName,
+            role:role,
+            userId:currentUserId
+        };
+
+        userServiceClient
+            .updateUser(user)
+            .then(findAllUsers);
+
+    }
+
+
     function renderUsers(users) {
         tbody.empty();
-        for (var i = 0; i < users.length; i++) {
+        for (let i=0; i<users.length; i++)
+        {
             var user = users[i];
-            // https://api.jquery.com/clone/
-            // // Clone creates a deep copy of the set of matched elements. https://api.jquery.com/clone/
-            // var clonedTableTemplate = tableTemplate.clone();
-            // clonedTableTemplate.attr('id', user.id)
-            // clonedTableTemplate.find('.wbdv-remove').click(deleteUser);
-            // clonedTableTemplate.find('.wbdv-edit').click(findUserById)
-            // clonedTableTemplate.find('.wbdv-username')
-            //     .html(user.username);
-            // clonedTableTemplate.find('.wbdv-first-name').html(user.firstName);
-            // clonedTableTemplate.find('.wbdv-last-name').html(user.lastName);
-            // clonedTableTemplate.find('.wbdv-role').html(user.role);
-            // tbody.append(clone);
-
-
-            var tr = $('<tr>');
-            var td = $('<td>');
-            td.append(user.username);
-            tr.append(td);
-
-            td = $('<td>');
-            td.append('*******');
-            tr.append(td);
-
-            td = $('<td>');
-            td.append(user.firstName);
-            tr.append(td);
-
-            td = $('<td>');
-            td.append(user.lastName);
-            tr.append(td);
-
-            td = $('<td>');
-            td.append(user.email);
-            tr.append(td);
-
-            td = $('<td>');
-            td.append(user.phone);
-            tr.append(td);
-
-
-            td = $('<td>');
-            td.append(user.dateOfBirth);
-            tr.append(td);
-
-            td = $('<td>');
-            td.append(user.role);
-            tr.append(td);
-
-            td = $('<td>');
-            var deleteBtn = $('<i class="fa-2x fas fa-trash-alt"></i>');
-            var editBtn = $('<i class="fa-2x fas fa-edit"></i>');
-            deleteBtn.click(deleteUser);
-            editBtn.click(editUser);
-            deleteBtn.attr('id', user.id);
-            editBtn.attr('id', user.id);
-            td.append(deleteBtn);
-            td.append(editBtn);
-            tr.append(td);
-            tr.appendTo(tbody);
+            var clone = template.clone(true,true);
+            clone.attr('id', user.id);
+            clone.find("#templateUsername").html(user.username);
+            clone.find("#templateFirstName").html(user.firstName);
+            clone.find("#templateLastName").html(user.lastName);
+            clone.find("#templateRole").html(user.role);
+            clone.find('#deleteIcon').click(deleteUser);
+            clone.find('#editIcon').click(findUserById);
+            tbody.append(clone);
         }
     }
 
-    function deleteUser(event) {
-        console.log(event);
-        var $button = $(event.currentTarget);
-        var id = $button.attr('id');
+    function createUser() {
+        var username = $("#UsernameFld").val();
+        var password = $("#PasswordFld").val();
+        var firstName =$("#FirstNameFld").val();
+        var lastName = $("#LastNameFld").val();
+        var role = $("#roleFld").val();
+        var user ={
+            username:username,
+            password:password,
+            firstName:firstName,
+            lastName:lastName,
+            role:role
+        };
 
         userServiceClient
-            .deleteUser(id)
-            .then(function () {
-                userServiceClient
-                    .findAllUsers()
-                    .then(renderUsers);
-            });
+            .createUser(user)
+            .then(findAllUsers);
+
     }
+
+    function findUserById(event) {
+        var editBtn = $(event.currentTarget);
+        var userId = editBtn
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        userServiceClient
+            .findUserById(userId)
+            .then(renderUser);
+        currentUserId = userId;
+        //$("#userIdFld").val(userId);
+
+
+
+    }
+
+    function renderUser(user) {
+        console.log(user.username);
+        $('#UsernameFld').val(user.username);
+        $('#PasswordFld').val(user.password);
+        $("#FirstNameFld").val(user.firstName);
+        $("#LastNameFld").val(user.lastName);
+        $("#roleFld").val(user.role);
+
+    }
+    function deleteUser(event) {
+        //console.log("inside delete user");
+        var deleteBtn = $(event.currentTarget);
+        var userId = deleteBtn
+            .parent()
+            .parent()
+            .parent()
+            .attr('id');
+
+        userServiceClient
+            .deleteUser(userId)
+            .then(findAllUsers);
+
+
+    }
+
+
 
 })();

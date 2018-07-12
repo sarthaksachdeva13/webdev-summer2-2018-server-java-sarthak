@@ -22,7 +22,7 @@
         userServiceClient
             .login(user)
             .then(function (response) {
-                window.location.href = "../profile/profile.template.client.html";
+                window.location.href = "profile.template.client.html";
             });
     }
 })();

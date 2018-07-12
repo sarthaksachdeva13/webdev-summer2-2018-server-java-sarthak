@@ -19,7 +19,7 @@
         let email = $('#email').val();
         let dateOfBirth = $('#dateOfBirth').val();
         let role = $('#role').val();
-        let dob = new Date(datedb);
+        let dob = new Date(dateOfBirth);
 
         currentUser =
             {
@@ -42,7 +42,7 @@
 
     function logout() {
         userServiceClient.logout().then(function (response) {
-            window.location.href = "../login/login.template.client.html";
+            window.location.href = "login.template.client.html";
         });
     }
 
@@ -52,7 +52,7 @@
         $('#lastName').val(user.lastName);
         $('#phone').val(user.phone);
         $('#email').val(user.email);
-        $('#dateOfBirth').val(user.dateOfBirth.substr(0, 10));
+        $('#dateOfBirth').val(user.dateOfBirth);
         $("#role").val(user.role);
     }
 

@@ -42,7 +42,7 @@
 
     function logout() {
         userServiceClient.logout().then(function (response) {
-            window.location.href = "login.template.client.html";
+            window.location.href = "../login/login.template.client.html";
         });
     }
 

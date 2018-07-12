@@ -9,7 +9,7 @@ function UserServiceClient() {
     this.getProfile = getProfile;
     this.updateProfile = updateProfile;
     this.logout = logout;
-    this.url = 'https://sarthakwebdev.herokuapp.com/api';
+    this.url = '/api';
     var self = this;
 
     function findAllUsers() {

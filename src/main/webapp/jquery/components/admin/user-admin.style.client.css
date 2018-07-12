@@ -14,11 +14,7 @@ table{
 
 }
 
-#roleFld {
-    width: fit-content;
-}
-
-.wbdv_fontawesome{
+.iconActions{
     cursor:pointer;
     white-space: nowrap;
 }

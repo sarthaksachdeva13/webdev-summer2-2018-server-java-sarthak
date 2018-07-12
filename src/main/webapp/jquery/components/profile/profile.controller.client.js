@@ -1,9 +1,9 @@
 (function () {
 
-    $(main)
+    $(main);
 
-    var userServiceClient = new UserServiceClient();
-    var currentUser;
+    let userServiceClient = new UserServiceClient();
+    let currentUser;
 
     function main() {
         userServiceClient.getProfile().then(renderProfile);
@@ -18,8 +18,8 @@
         let phone = $('#phone').val();
         let email = $('#email').val();
         let dateOfBirth = $('#dateOfBirth').val();
+        let newDateofBirth = new Date(dateOfBirth);
         let role = $('#role').val();
-        let dob = new Date(dateOfBirth);
 
         currentUser =
             {
@@ -28,20 +28,18 @@
                 "lastName": lastName,
                 "phone": phone,
                 "email": email,
-                "dateOfBirth": dob,
+                "dateOfBirth": newDateofBirth,
                 "role": role
             };
 
-
         userServiceClient.updateProfile(currentUser)
             .then(function (response) {
-                alert("Profile Updated Successful");
                 renderProfile(response)
             });
     }
 
     function logout() {
-        userServiceClient.logout().then(function (response) {
+        userServiceClient.logout().then(function () {
             window.location.href = "../login/login.template.client.html";
         });
     }
@@ -55,5 +53,4 @@
         $('#dateOfBirth').val(user.dateOfBirth);
         $("#role").val(user.role);
     }
-
 })();

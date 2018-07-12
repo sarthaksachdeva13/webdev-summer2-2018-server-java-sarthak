@@ -27,12 +27,6 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    @DeleteMapping("/api/user/{userId}")
-    public void deleteUser(@PathVariable("userId") int id)
-    {
-        userRepository.deleteById(id);
-    }
-
     @GetMapping("/api/user/{userId}")
     public User findUserById(@PathVariable("userId") int id)
     {
@@ -41,19 +35,24 @@ public class UserService {
 
     }
 
+    @DeleteMapping("/api/user/{userId}")
+    public void deleteUser(@PathVariable("userId") int id)
+    {
+        userRepository.deleteById(id);
+    }
+
+
     @PutMapping("/api/user/{userId}")
-    public User updateUser(@PathVariable("userId") int id,@RequestBody User user) {
+    public User updateUser(@PathVariable("userId") int id,@RequestBody User updatedUser) {
         Optional<User> optional = userRepository.findById(id);
         if(optional.isPresent())
         {
-
             User usr = optional.get();
-            System.out.println("User ID # " + usr.getId());
-            usr.setFirstName(user.getFirstName());
-            usr.setLastName(user.getLastName());
-            usr.setPassword(user.getPassword());
-            usr.setRole(user.getRole());
-            usr.setUsername(user.getUsername());
+            usr.setFirstName(updatedUser.getFirstName());
+            usr.setLastName(updatedUser.getLastName());
+            usr.setPassword(updatedUser.getPassword());
+            usr.setRole(updatedUser.getRole());
+            usr.setUsername(updatedUser.getUsername());
             userRepository.save(usr);
             return userRepository.findById(id).get();
         }
@@ -66,18 +65,6 @@ public class UserService {
         return  userRepository.findUserByUserName(username);
     }
 
-    @PostMapping("/api/register")
-    public User register(@RequestBody User user,HttpSession session) {
-
-        Iterable<User> currentUser = findUserByUsername(user.getUsername());
-        if (!currentUser.iterator().hasNext())
-        {
-            User registeredUser = createUser(user);
-            session.setAttribute("currentUser", registeredUser);
-            return userRepository.findById(registeredUser.getId()).get();
-        }
-        return null;
-    }
 
     @PostMapping("/api/login")
     public User login(@RequestBody User user,HttpSession session)
@@ -87,6 +74,18 @@ public class UserService {
             User curUser = currentUser.iterator().next();
             session.setAttribute("currentUser", curUser);
             return userRepository.findById(curUser.getId()).get();
+        }
+        return null;
+    }
+
+    @PostMapping("/api/register")
+    public User register(@RequestBody User user,HttpSession session) {
+        Iterable<User> currentUser = findUserByUsername(user.getUsername());
+        if (!currentUser.iterator().hasNext())
+        {
+            User registeredUser = createUser(user);
+            session.setAttribute("currentUser", registeredUser);
+            return userRepository.findById(registeredUser.getId()).get();
         }
         return null;
     }
@@ -110,7 +109,6 @@ public class UserService {
     public User logout(HttpSession session) {
         session.invalidate();
         return null;
-
     }
 
 }

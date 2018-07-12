@@ -1,28 +1,29 @@
 (function () {
 
-    $(init)
+    $(init);
 
-    var userServiceClient = new UserServiceClient();
+    let userServiceClient = new UserServiceClient();
 
     function init() {
         $("#registerBtn").click(register);
     }
 
     function register() {
-        var username = $("#username").val();
-        var password = $("#password").val();
-        var password2 = $("#password2").val();
-
-        var user =
+        let username = $("#username").val();
+        let password = $("#password").val();
+        let password2 = $("#password2").val();
+        if (password !== password2) {
+            alert("Enter the same password");
+        }
+        let user =
             {
                 "username": username,
                 "password": password,
                 "password2": password2
             };
-
         userServiceClient.register(user)
-            .then(function(response) {
-                window.location.href = "jquery/components/profile/profile.template.client.html";
+            .then(function () {
+                window.location.href = "../profile/profile.template.client.html";
             });
     }
 

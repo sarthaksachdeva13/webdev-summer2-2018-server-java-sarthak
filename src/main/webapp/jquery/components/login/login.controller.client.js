@@ -1,27 +1,23 @@
 (function () {
 
-    $(main)
-
-    var userServiceClient = new UserServiceClient();
+    $(main);
+    let userServiceClient = new UserServiceClient();
 
     function main() {
-
         $("#loginBtn").click(login);
-
     }
 
     function login() {
-        var username = $("#username").val();
-        var password = $("#password").val();
-
-        var user = {
-            "username":username,
-            "password":password
+        let username = $("#username").val();
+        let password = $("#password").val();
+        let user = {
+            "username": username,
+            "password": password
         };
 
         userServiceClient
             .login(user)
-            .then(function (response) {
+            .then(function () {
                 window.location.href = "../profile/profile.template.client.html";
             });
     }

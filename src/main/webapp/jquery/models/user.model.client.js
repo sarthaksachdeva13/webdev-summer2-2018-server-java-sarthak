@@ -8,7 +8,6 @@ function User(username, password, firstName, lastName, dateOfBirth, role, email,
     this.email = email;
     this.dateOfBirth = dateOfBirth;
     this.phone = phone;
-
     this.setUsername = setUsername;
     this.getUsername = getUsername;
     this.setPassword = setPassword;

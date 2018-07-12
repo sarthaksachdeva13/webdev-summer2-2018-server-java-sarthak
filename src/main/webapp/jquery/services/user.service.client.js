@@ -10,7 +10,7 @@ function UserServiceClient() {
     this.updateProfile = updateProfile;
     this.logout = logout;
     this.url = '/api';
-    var self = this;
+    let self = this;
 
     function findAllUsers() {
         return fetch(self.url + "/user")

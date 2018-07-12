@@ -67,6 +67,7 @@
             role: role,
             userId: uID
         };
+        console.log(user);
         userService
             .updateUser(user)
             .then(findAllUsers);

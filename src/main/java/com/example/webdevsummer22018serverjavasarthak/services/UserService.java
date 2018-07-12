@@ -47,14 +47,15 @@ public class UserService {
         Optional<User> optional = userRepository.findById(id);
         if(optional.isPresent())
         {
-            User usr = optional.get();
-            usr.setFirstName(updatedUser.getFirstName());
-            usr.setLastName(updatedUser.getLastName());
-            usr.setPassword(updatedUser.getPassword());
-            usr.setRole(updatedUser.getRole());
-            usr.setEmail(updatedUser.getEmail());
-            usr.setUsername(updatedUser.getUsername());
-            userRepository.save(usr);
+            User user = optional.get();
+            user.setFirstName(updatedUser.getFirstName());
+            user.setUsername(updatedUser.getUsername());
+            user.setLastName(updatedUser.getLastName());
+            user.setPassword(updatedUser.getPassword());
+            user.setRole(updatedUser.getRole());
+            user.setPhoneNo(updatedUser.getPhoneNo());
+            user.setEmail(updatedUser.getEmail());
+            userRepository.save(user);
             return userRepository.findById(id).get();
         }
         return null;
@@ -72,9 +73,9 @@ public class UserService {
     {
         Iterable<User> currentUser = userRepository.findUserByCredentials(user.getUsername(), user.getPassword());
         if (currentUser.iterator().hasNext()){
-            User curUser = currentUser.iterator().next();
-            session.setAttribute("currentUser", curUser);
-            return userRepository.findById(curUser.getId()).get();
+            User u = currentUser.iterator().next();
+            session.setAttribute("currentUser", u);
+            return userRepository.findById(u.getId()).get();
         }
         return null;
     }

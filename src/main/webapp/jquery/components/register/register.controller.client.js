@@ -3,18 +3,19 @@
     $(init);
 
     let userServiceClient = new UserServiceClient();
+    let flag = false;
 
     function init() {
+        if(flag){
+            $('.alert').toggleClass('hide');
+        }
         $("#registerBtn").click(register);
     }
 
     function register() {
-        let username = $("#username").val();
-        let password = $("#password").val();
-        let password2 = $("#password2").val();
-        if (password !== password2) {
-            alert("Enter the same password");
-        }
+        let username = $("#username").val(),
+            password = $("#password").val(),
+            password2 = $("#password2").val();
         let user =
             {
                 "username": username,
@@ -23,7 +24,12 @@
             };
         userServiceClient.register(user)
             .then(function () {
-                window.location.href = "../profile/profile.template.client.html";
+                if (user.password !== user.password2) {
+                    $('.alert').removeClass('hide').addClass('show');
+                }
+                else{
+                    window.location.href = "../profile/profile.template.client.html";
+                }
             });
     }
 

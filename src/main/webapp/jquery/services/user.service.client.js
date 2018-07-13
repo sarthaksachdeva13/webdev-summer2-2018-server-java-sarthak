@@ -12,15 +12,47 @@ function UserServiceClient() {
     this.url = '/api';
     let self = this;
 
-    function findAllUsers() {
-        return fetch(self.url + "/user")
-            .then(function (response) {
-                return response.json();
-            });
+
+    //Registration
+    function register(user) {
+        return fetch(self.url + "/register", {
+            method: 'post',
+            credentials: 'include',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        });
     }
 
+
+    // Login and logout
+    function login(user) {
+        return fetch(self.url + "/login", {
+            method: 'post',
+            credentials: 'include',
+            body: JSON.stringify(user),
+            headers: {
+                'content-type': 'application/json'
+            }
+        }).then(function (response) {
+            return response.json();
+        });
+    }
+
+    function logout() {
+        return fetch(self.url + "/logout", {
+            method: 'post',
+            credentials: 'include'
+        });
+    }
+
+
+    // Update, create and delete
     function updateUser(user) {
-        return fetch(self.url + "/user"+ "/"+ user.userId, {
+        return fetch(self.url + "/user" + "/" + user.userId, {
             method: 'put',
             body: JSON.stringify(user),
             headers: {
@@ -40,23 +72,47 @@ function UserServiceClient() {
     }
 
     function deleteUser(userId) {
-        return fetch(self.url + "/user"+"/"+ userId,{
-            method:'delete'
+        return fetch(self.url + "/user" + "/" + userId, {
+            method: 'delete'
         });
 
     }
 
-    function findUserById(userId) {
-        return fetch(self.url + "/user"+"/"+ userId)
-            .then(function(response){
+
+    //Find all users
+    function findAllUsers() {
+        return fetch(self.url + "/user")
+            .then(function (response) {
                 return response.json();
             });
     }
 
-    function register(user) {
-        return fetch(self.url + "/register", {
-            method: 'post',
-            credentials:'include',
+
+    //Find a user by ID
+    function findUserById(userId) {
+        return fetch(self.url + "/user" + "/" + userId)
+            .then(function (response) {
+                return response.json();
+            });
+    }
+
+
+    //Get profile
+    function getProfile() {
+        return fetch(self.url + "/profile", {
+            credentials: 'include'
+        }).then(function (response) {
+            return response.json();
+        });
+
+    }
+
+
+    //Update profile
+    function updateProfile(user) {
+        return fetch(self.url + "/profile", {
+            method: 'put',
+            credentials: 'include',
             body: JSON.stringify(user),
             headers: {
                 'content-type': 'application/json'
@@ -64,49 +120,7 @@ function UserServiceClient() {
         }).then(function (response) {
             return response.json();
         });
-    }
 
-    function login(user) {
-        return fetch(self.url + "/login",{
-            method :'post',
-            credentials:'include',
-            body:JSON.stringify(user),
-            headers:{
-                'content-type':'application/json'
-            }
-        }).then(function (response) {
-            return response.json();
-        });
-    }
-
-    function getProfile() {
-        return fetch(self.url + "/profile",{
-            credentials:'include'
-        }).then(function (response) {
-            return response.json();
-        });
-
-    }
-
-    function updateProfile(user) {
-        return fetch(self.url + "/profile",{
-            method :'put',
-            credentials:'include',
-            body:JSON.stringify(user),
-            headers:{
-                'content-type':'application/json'
-            }
-        }).then(function (response) {
-            return response.json();
-        });
-
-    }
-
-    function logout() {
-        return fetch(self.url + "/logout",{
-            method :'post',
-            credentials:'include'
-        });
     }
 }
 

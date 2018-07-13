@@ -17,3 +17,17 @@
 .alert{
     display: none;
 }
+
+#homelink{
+    font-size: 30px;
+    font-family: 'Cabin Sketch', cursive;
+    padding-top: 250px;
+    align-items: center;
+    width: 31%;
+    margin: 0 auto;
+}
+
+#indexlink
+{
+    color: rgb(139, 0, 0);
+}

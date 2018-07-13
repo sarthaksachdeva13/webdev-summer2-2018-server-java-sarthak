@@ -5,13 +5,16 @@
           integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Dosis:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin+Sketch" rel="stylesheet">
     <link href="register.style.client.css" rel="stylesheet"/>
     <link href="../../../styles.css" rel="stylesheet"/>
 </head>
 <body background="http://blog.somethingpeach.com/wp-content/uploads/wallpaper_007_2560x1440.jpg">
 <h1 class="headingFont">Register</h1>
 <div class="container-fluid registerForm">
-
+    <div class="alert alert-danger fade hide" role="alert">
+        Passwords don't match!!
+    </div>
     <!--Username-->
     <div class="form-group">
         <label class="labelNames" for="username">Username</label>
@@ -51,6 +54,11 @@
         </label>
         <a href="/jquery/components/login/login.template.client.html">
             Log in!
+        </a>
+    </div>
+    <div id="homelink">
+        <a id="indexlink" href="../../../index.html">
+            Home
         </a>
     </div>
 </div>

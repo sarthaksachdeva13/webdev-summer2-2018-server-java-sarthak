@@ -1,9 +1,9 @@
 (function () {
     $(main);
-    let tbody = $("tbody");
-    let template = $(".tableTemplate");
-    let uID;
-    let userService = new UserServiceClient();
+    let tbody = $("tbody"),
+        template = $(".tableTemplate"),
+        uID,
+        userService = new UserServiceClient();
 
     function main() {
         findAllUsers();
@@ -18,20 +18,19 @@
     }
 
     function createUser() {
-        console.log("user created");
-        let username = $("#usernameInput").val();
-        let password = $("#passwordInput").val();
-        let firstName = $("#firstNameInput").val();
-        let lastName = $("#lastNameInput").val();
-        let email = $("#emailInput").val();
-        let role = $("#roleInput").val();
+        let username = $("#usernameInput").val(),
+            password = $("#passwordInput").val(),
+            firstName = $("#firstNameInput").val(),
+            lastName = $("#lastNameInput").val(),
+            email = $("#emailInput").val(),
+            role = $("#roleInput").val();
 
-        var user = {
+        let user = {
             username: username,
             password: password,
             firstName: firstName,
             lastName: lastName,
-            email:email,
+            email: email,
             role: role
         };
 
@@ -42,8 +41,8 @@
     }
 
     function findUserById(event) {
-        let editBtn = $(event.currentTarget);
-        let userId = editBtn.parent().parent().parent().attr('id');
+        let editBtn = $(event.currentTarget),
+            userId = editBtn.parent().parent().parent().attr('id');
         userService
             .findUserById(userId)
             .then(renderUser);
@@ -52,12 +51,12 @@
 
 
     function updateUser() {
-        let username = $("#usernameInput").val();
-        let password = $("#passwordInput").val();
-        let firstName = $("#firstNameInput").val();
-        let lastName = $("#lastNameInput").val();
-        let email = $("#emailInput").val();
-        let role = $("#roleInput").val();
+        let username = $("#usernameInput").val(),
+            password = $("#passwordInput").val(),
+            firstName = $("#firstNameInput").val(),
+            lastName = $("#lastNameInput").val(),
+            email = $("#emailInput").val(),
+            role = $("#roleInput").val();
         let user = {
             username: username,
             password: password,
@@ -74,8 +73,8 @@
     }
 
     function deleteUser(event) {
-        let deleteBtn = $(event.currentTarget);
-        let userId = deleteBtn.parent().parent().parent().attr('id');
+        let deleteBtn = $(event.currentTarget),
+            userId = deleteBtn.parent().parent().parent().attr('id');
         userService
             .deleteUser(userId)
             .then(findAllUsers);
@@ -93,8 +92,8 @@
     function renderUsers(users) {
         tbody.empty();
         for (let i = 0; i < users.length; i++) {
-            let user = users[i];
-            let clone = template.clone();
+            let user = users[i],
+                clone = template.clone();
             clone.attr('id', user.id);
             clone.find(".templateUsername").html(user.username);
             clone.find(".templateFirstName").html(user.firstName);
@@ -106,5 +105,4 @@
             tbody.append(clone);
         }
     }
-
 })();

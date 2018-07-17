@@ -1,6 +1,6 @@
-package com.example.webdevsummer22018serverjavasarthak.repositories;
+package wbdv.repositories;
 
-import com.example.webdevsummer22018serverjavasarthak.models.User;
+import wbdv.models.User;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

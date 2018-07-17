@@ -1,4 +1,4 @@
-package com.example.webdevsummer22018serverjavasarthak.models;
+package wbdv.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

@@ -1,4 +1,4 @@
-package com.example.webdevsummer22018serverjavasarthak.services;
+package wbdv.services;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

@@ -1,7 +1,7 @@
-package com.example.webdevsummer22018serverjavasarthak.services;
+package wbdv.services;
 
-import com.example.webdevsummer22018serverjavasarthak.models.User;
-import com.example.webdevsummer22018serverjavasarthak.repositories.UserRepository;
+import wbdv.models.User;
+import wbdv.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,12 +1,12 @@
-package com.example.webdevsummer22018serverjavasarthak;
+package wbdv;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DemoApplication {
+public class WhiteBoardApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(WhiteBoardApplication.class, args);
 	}
 }

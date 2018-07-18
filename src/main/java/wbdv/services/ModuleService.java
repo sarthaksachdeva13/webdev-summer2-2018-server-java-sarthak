@@ -48,15 +48,14 @@ public class ModuleService {
             m.setCourse(course);
             m.setTitle(module.getTitle());
             return moduleRepository.save(m);
-
         }
         return null;
     }
 
 
-    @DeleteMapping("/api/module/{moduleId}")
-    public void deleteModule(@PathVariable("moduleId") int moduleId) {
-        moduleRepository.deleteById(moduleId);
+    @DeleteMapping("/api/module/{mid}")
+    public void deleteModule(@PathVariable("mid") int mid) {
+        moduleRepository.deleteById(mid);
     }
 
 }

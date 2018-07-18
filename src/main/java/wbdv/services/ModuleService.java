@@ -8,10 +8,12 @@ import wbdv.models.Module;
 import wbdv.repositories.CourseRepository;
 import wbdv.repositories.ModuleRepository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
-@CrossOrigin(origins = "*" , maxAge=3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 public class ModuleService {
 
     @Autowired
@@ -20,10 +22,27 @@ public class ModuleService {
     @Autowired
     ModuleRepository moduleRepository;
 
-    @PostMapping("/api/course/{courseId}/module")
-    public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module module){
+
+    @GetMapping("/api/module")
+    public List<Module> findAllModules(){
+        return (List<Module>) moduleRepository.findAll();
+    }
+
+    @GetMapping("/api/course/{courseId}/module")
+    public List<Module> findAllCourseModules(@PathVariable("courseId") int courseId) {
         Optional<Course> c = courseRepository.findById(courseId);
-        if(c.isPresent()){
+        if (c.isPresent()) {
+            Course course = c.get();
+            return course.getModules();
+        } else {
+            return new ArrayList<Module>();
+        }
+    }
+
+    @PostMapping("/api/course/{courseId}/module")
+    public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module module) {
+        Optional<Course> c = courseRepository.findById(courseId);
+        if (c.isPresent()) {
             Course course = c.get();
             Module m = new Module();
             m.setCourse(course);
@@ -34,5 +53,10 @@ public class ModuleService {
         return null;
     }
 
-    
+
+    @DeleteMapping("/api/module/{moduleId}")
+    public void deleteModule(@PathVariable("moduleId") int moduleId){
+        moduleRepository.deleteById(moduleId);
+    }
+
 }

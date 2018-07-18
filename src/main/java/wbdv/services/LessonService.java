@@ -60,6 +60,21 @@ public class LessonService {
         }
     }
 
+
+    @PutMapping("/api/lesson/{lessonId}")
+    public Lesson updateLesson(@PathVariable("lessonId") int lessonId, @RequestBody Lesson newLesson) {
+        Optional<Lesson> data = lessonRepository.findById(lessonId);
+        if (data.isPresent()) {
+            Lesson lesson = data.get();
+            lesson.setId(newLesson.getId());
+            lesson.setTitle(newLesson.getTitle());
+            lesson.setModule(newLesson.getModule());
+            lessonRepository.save(lesson);
+            return lesson;
+        }
+        return null;
+    }
+
     @DeleteMapping("/api/lesson/{id}")
     public void deleteLesson(@PathVariable("id") int id) {
         lessonRepository.deleteById(id);

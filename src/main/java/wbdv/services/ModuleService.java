@@ -7,8 +7,6 @@ import wbdv.models.Course;
 import wbdv.models.Module;
 import wbdv.repositories.CourseRepository;
 import wbdv.repositories.ModuleRepository;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +36,6 @@ public class ModuleService {
         return null;
     }
 
-
     @PostMapping("/api/course/{courseId}/module")
     public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module module) {
         Optional<Course> data = courseRepository.findById(courseId);
@@ -51,7 +48,6 @@ public class ModuleService {
         }
         return null;
     }
-
 
     @DeleteMapping("/api/module/{mid}")
     public void deleteModule(@PathVariable("mid") int mid) {

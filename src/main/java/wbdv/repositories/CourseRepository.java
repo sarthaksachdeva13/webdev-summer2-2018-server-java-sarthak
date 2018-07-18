@@ -9,5 +9,5 @@ import java.util.List;
 public interface CourseRepository extends CrudRepository<Course, Integer> {
 
     @Query("SELECT c from Course c ORDER BY c.title")
-    List<Course> findAllOrderedCourses();
+    List<Course> sortedCourses();
 }

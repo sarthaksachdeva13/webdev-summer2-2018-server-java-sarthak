@@ -22,8 +22,8 @@ public class CourseService {
     }
 
     @GetMapping("api/course/sorted")
-    public List<Course> findAllCoursesSorted() {
-        return courseRepository.findAllOrderedCourses();
+    public List<Course> sortedCourses() {
+        return courseRepository.sortedCourses();
     }
 
     @PostMapping("/api/course")
@@ -41,8 +41,5 @@ public class CourseService {
         Optional<Course> c = courseRepository.findById(courseId);
         return c.orElse(null);
     }
-
-
-
 
 }

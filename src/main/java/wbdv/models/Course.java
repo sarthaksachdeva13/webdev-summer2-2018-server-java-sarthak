@@ -1,10 +1,8 @@
 package wbdv.models;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,10 +14,8 @@ public class Course {
     private String title;
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    @JsonFormat(pattern = "MMMM" + " " + "dd" + "," + "YYYY")
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "MMMM" + " " + "dd" + "," + "YYYY")
     private Date modified;
     @OneToMany(mappedBy = "course")
     private List<Module> modules;

@@ -23,6 +23,18 @@ public class TopicService {
     @Autowired
     LessonRepository lessonRepository;
 
+
+    @GetMapping("/api/topic/{topicId}")
+    public Topic findTopicById(@PathVariable("topicId") int topicId) {
+        Optional<Topic> data = topicRepository.findById(topicId);
+        return data.orElse(null);
+    }
+
+    @GetMapping("/api/topic")
+    public List<Topic> findAllTopics() {
+        return (List<Topic>) topicRepository.findAll();
+    }
+
     @GetMapping("/api/lesson/{lessonId}/topic")
     public List<Topic> findAllTopicsForLesson(@PathVariable("lessonId") int lessonId) {
         Optional<Lesson> data = lessonRepository.findById(lessonId);
@@ -30,7 +42,7 @@ public class TopicService {
             Lesson lesson = data.get();
             return lesson.getTopics();
         }
-        return new ArrayList<>();
+        return null;
     }
 
     @PostMapping("/api/lesson/{lessonId}/topic")
@@ -42,6 +54,21 @@ public class TopicService {
             t.setTitle(topic.getTitle());
             t.setLesson(lesson);
             return topicRepository.save(t);
+        }
+        return null;
+    }
+
+
+    @PutMapping("/api/topic/{topicId}")
+    public Topic updateTopic(@PathVariable("topicId") int topicId, @RequestBody Topic newTopic) {
+        Optional<Topic> data = topicRepository.findById(topicId);
+        if (data.isPresent()) {
+            Topic topic = data.get();
+            topic.setId(newTopic.getId());
+            topic.setTitle(newTopic.getTitle());
+            topic.setLesson(newTopic.getLesson());
+            topicRepository.save(topic);
+            return topic;
         }
         return null;
     }

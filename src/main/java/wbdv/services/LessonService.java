@@ -41,7 +41,7 @@ public class LessonService {
             Module module = moduleData.get();
             return module.getLessons();
         }
-        return new ArrayList<>();
+        return null;
     }
 
     @PostMapping("/api/course/{cid}/module/{mid}/lesson")

@@ -1,5 +1,6 @@
 package wbdv.models;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class Course {
     @CreationTimestamp
     private Date created;
     @Temporal(TemporalType.TIMESTAMP)
+    @UpdateTimestamp
     private Date modified;
     @OneToMany(mappedBy = "course")
     private List<Module> modules;

@@ -7,7 +7,6 @@ import wbdv.models.Topic;
 import wbdv.repositories.LessonRepository;
 import wbdv.repositories.TopicRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,26 +16,15 @@ public class TopicService {
 
 
     @Autowired
+    LessonRepository lessonRepository;
+    @Autowired
     TopicRepository topicRepository;
 
-
-    @Autowired
-    LessonRepository lessonRepository;
-
-
-    @GetMapping("/api/topic/{topicId}")
-    public Topic findTopicById(@PathVariable("topicId") int topicId) {
-        Optional<Topic> data = topicRepository.findById(topicId);
-        return data.orElse(null);
-    }
-
-    @GetMapping("/api/topic")
-    public List<Topic> findAllTopics() {
-        return (List<Topic>) topicRepository.findAll();
-    }
-
     @GetMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/topic")
-    public List<Topic> findAllTopicsForLesson(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId, @PathVariable("lessonId") int lessonId) {
+    public List<Topic> findAllTopicsForLesson(
+            @PathVariable("courseId") int courseId,
+            @PathVariable("moduleId") int moduleId,
+            @PathVariable("lessonId") int lessonId) {
         Optional<Lesson> data = lessonRepository.findById(lessonId);
         if(data.isPresent()) {
             Lesson lesson = data.get();
@@ -46,7 +34,9 @@ public class TopicService {
     }
 
     @PostMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/topic")
-    public Topic createTopic(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId, @PathVariable("lessonId") int lessonId,
+    public Topic createTopic(@PathVariable("courseId") int courseId,
+                             @PathVariable("moduleId") int moduleId,
+                             @PathVariable("lessonId") int lessonId,
                              @RequestBody Topic newTopic) {
         Optional<Lesson> data = lessonRepository.findById(lessonId);
         if (data.isPresent()) {
@@ -58,6 +48,24 @@ public class TopicService {
     }
 
 
+    @DeleteMapping("/api/topic/{topicId}")
+    public void deleteTopic(@PathVariable("topicId") int topicId)
+    {
+        topicRepository.deleteById(topicId);
+    }
+
+    @GetMapping("/api/topic")
+    public List<Topic> findAllTopics()
+    {
+        return (List<Topic>) topicRepository.findAll();
+    }
+
+    @GetMapping("/api/topic/{topicId}")
+    public Topic findTopicById(@PathVariable("topicId") int topicId) {
+        Optional<Topic> data = topicRepository.findById(topicId);
+        return data.orElse(null);
+    }
+
     @PutMapping("/api/topic/{topicId}")
     public Topic updateTopic(@PathVariable("topicId") int topicId, @RequestBody Topic newTopic) {
         Optional<Topic> data = topicRepository.findById(topicId);
@@ -66,15 +74,10 @@ public class TopicService {
             topic.setId(newTopic.getId());
             topic.setTitle(newTopic.getTitle());
             topic.setLesson(newTopic.getLesson());
-            System.out.println("Module: " + topic);
+            System.out.println(topic);
             topicRepository.save(topic);
             return topic;
         }
         return null;
-    }
-
-    @DeleteMapping("/api/topic/{topicId}")
-    public void deleteTopic(@PathVariable("topicId") int topicId) {
-        topicRepository.deleteById(topicId);
     }
 }

@@ -16,26 +16,14 @@ public class ModuleService {
 
     @Autowired
     CourseRepository courseRepository;
-
     @Autowired
     ModuleRepository moduleRepository;
 
-
-    @GetMapping("/api/module")
-    public List<Module> findAllModules() {
-        return (List<Module>) moduleRepository.findAll();
-    }
-
-    @GetMapping("/api/module/{moduleId}")
-    public Module findModuleById(@PathVariable("moduleId") int moduleId) {
-        Optional<Module> data = moduleRepository.findById(moduleId);
-        return data.orElse(null);
-    }
-
     @GetMapping("/api/course/{courseId}/module")
-    public List<Module> findAllModulesForCourse(@PathVariable("courseId") int courseId) {
+    public List<Module> findAllModulesForCourse(
+            @PathVariable("courseId") int courseId) {
         Optional<Course> data = courseRepository.findById(courseId);
-        if (data.isPresent()) {
+        if(data.isPresent()) {
             Course course = data.get();
             return course.getModules();
         }
@@ -53,11 +41,24 @@ public class ModuleService {
         return null;
     }
 
-    @DeleteMapping("/api/module/{mid}")
-    public void deleteModule(@PathVariable("mid") int mid) {
-        moduleRepository.deleteById(mid);
+
+    @DeleteMapping("/api/module/{moduleId}")
+    public void deleteModule(@PathVariable("moduleId") int moduleId)
+    {
+        moduleRepository.deleteById(moduleId);
     }
 
+    @GetMapping("/api/module")
+    public List<Module> findAllModules()
+    {
+        return (List<Module>) moduleRepository.findAll();
+    }
+
+    @GetMapping("/api/module/{moduleId}")
+    public Module findModuleById(@PathVariable("moduleId") int moduleId) {
+        Optional<Module> data = moduleRepository.findById(moduleId);
+        return data.orElse(null);
+    }
 
     @PutMapping("/api/module/{moduleId}")
     public Module updateModule(@PathVariable("moduleId") int moduleId, @RequestBody Module newModule) {
@@ -67,7 +68,7 @@ public class ModuleService {
             module.setId(newModule.getId());
             module.setTitle(newModule.getTitle());
             module.setCourse(newModule.getCourse());
-            System.out.println("Module: " + module);
+            System.out.println(module);
             moduleRepository.save(module);
             return module;
         }

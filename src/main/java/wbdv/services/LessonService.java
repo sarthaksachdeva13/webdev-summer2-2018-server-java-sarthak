@@ -34,30 +34,26 @@ public class LessonService {
         return (List<Lesson>) lessonRepository.findAll();
     }
 
-    @GetMapping("/api/course/{cid}/module/{mid}/lesson")
-    public List<Lesson> findAllLessonsForModule(@PathVariable("cid") int cid, @PathVariable("mid") int mid) {
-        Optional<Module> moduleData = moduleRepository.findById(mid);
-        if (moduleData.isPresent()) {
-            Module module = moduleData.get();
+    @GetMapping("/api/course/{courseId}/module/{moduleId}/lesson")
+    public List<Lesson> findAllLessonsForModule(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId) {
+        Optional<Module> data = moduleRepository.findById(moduleId);
+        if(data.isPresent()) {
+            Module module = data.get();
             return module.getLessons();
         }
         return null;
     }
 
-    @PostMapping("/api/course/{cid}/module/{mid}/lesson")
-    public Lesson createLesson(@RequestBody Lesson newLesson, @PathVariable("cid") int cid,
-                               @PathVariable("mid") int mid) {
-        Optional<Module> data = moduleRepository.findById(mid);
+
+    @PostMapping("/api/course/{courseId}/module/{moduleId}/lesson")
+    public Lesson createLesson(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId, @RequestBody Lesson newLesson) {
+        Optional<Module> data = moduleRepository.findById(moduleId);
         if (data.isPresent()) {
             Module module = data.get();
-            Lesson lesson = new Lesson();
-            lesson.setTitle(newLesson.getTitle());
-            lesson.setModule(module);
-            return lessonRepository.save(lesson);
+            newLesson.setModule(module);
+            return lessonRepository.save(newLesson);
         }
-        else {
-            return null;
-        }
+        return null;
     }
 
 
@@ -69,6 +65,7 @@ public class LessonService {
             lesson.setId(newLesson.getId());
             lesson.setTitle(newLesson.getTitle());
             lesson.setModule(newLesson.getModule());
+            System.out.println("Module: " + lesson);
             lessonRepository.save(lesson);
             return lesson;
         }

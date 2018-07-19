@@ -16,6 +16,13 @@ public class CourseService {
     @Autowired
     CourseRepository courseRepository;
 
+
+    @GetMapping("api/course/{courseId}")
+    public Course findCourseById(@PathVariable("courseId") int courseId) {
+        Optional<Course> c = courseRepository.findById(courseId);
+        return c.orElse(null);
+    }
+
     @GetMapping("/api/course")
     public List<Course> findAllCourses() {
         return (List<Course>) courseRepository.findAll();
@@ -25,6 +32,7 @@ public class CourseService {
     public List<Course> sortedCourses() {
         return courseRepository.sortedCourses();
     }
+
 
     @PostMapping("/api/course")
     public Course createCourse(@RequestBody Course course) {
@@ -36,10 +44,25 @@ public class CourseService {
         courseRepository.deleteById(id);
     }
 
-    @GetMapping("api/course/{courseId}")
-    public Course findCourseById(@PathVariable("courseId") int courseId) {
-        Optional<Course> c = courseRepository.findById(courseId);
-        return c.orElse(null);
+    @PutMapping("/api/course/{courseId}")
+    public Course updateCourse(@PathVariable("courseId") int courseId, @RequestBody Course newCourse) {
+        Optional<Course> data = courseRepository.findById(courseId);
+        if (data.isPresent()) {
+            Course course = data.get();
+            course.setId(newCourse.getId());
+            course.setTitle(newCourse.getTitle());
+            course.setCreated(newCourse.getCreated());
+            course.setModified(newCourse.getModified());
+            course.setModules(newCourse.getModules());
+            courseRepository.save(course);
+            return course;
+        }
+        return null;
     }
+
+
+
+
+
 
 }

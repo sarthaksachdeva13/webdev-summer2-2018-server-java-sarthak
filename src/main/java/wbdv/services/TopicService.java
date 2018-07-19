@@ -35,25 +35,24 @@ public class TopicService {
         return (List<Topic>) topicRepository.findAll();
     }
 
-    @GetMapping("/api/lesson/{lessonId}/topic")
-    public List<Topic> findAllTopicsForLesson(@PathVariable("lessonId") int lessonId) {
+    @GetMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/topic")
+    public List<Topic> findAllTopicsForLesson(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId, @PathVariable("lessonId") int lessonId) {
         Optional<Lesson> data = lessonRepository.findById(lessonId);
-        if (data.isPresent()) {
+        if(data.isPresent()) {
             Lesson lesson = data.get();
             return lesson.getTopics();
         }
         return null;
     }
 
-    @PostMapping("/api/lesson/{lessonId}/topic")
-    public Topic createTopic(@RequestBody Topic topic, @PathVariable("lessonId") int lessonId) {
+    @PostMapping("/api/course/{courseId}/module/{moduleId}/lesson/{lessonId}/topic")
+    public Topic createTopic(@PathVariable("courseId") int courseId, @PathVariable("moduleId") int moduleId, @PathVariable("lessonId") int lessonId,
+                             @RequestBody Topic newTopic) {
         Optional<Lesson> data = lessonRepository.findById(lessonId);
         if (data.isPresent()) {
             Lesson lesson = data.get();
-            Topic t = new Topic();
-            t.setTitle(topic.getTitle());
-            t.setLesson(lesson);
-            return topicRepository.save(t);
+            newTopic.setLesson(lesson);
+            return topicRepository.save(newTopic);
         }
         return null;
     }
@@ -67,6 +66,7 @@ public class TopicService {
             topic.setId(newTopic.getId());
             topic.setTitle(newTopic.getTitle());
             topic.setLesson(newTopic.getLesson());
+            System.out.println("Module: " + topic);
             topicRepository.save(topic);
             return topic;
         }

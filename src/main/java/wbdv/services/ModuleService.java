@@ -43,17 +43,21 @@ public class ModuleService {
     }
 
     @PostMapping("/api/course/{courseId}/module")
-    public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module module) {
+    public Module createModule(@PathVariable("courseId") int courseId, @RequestBody Module newModule) {
         Optional<Course> data = courseRepository.findById(courseId);
         if (data.isPresent()) {
             Course course = data.get();
-            Module m = new Module();
-            m.setCourse(course);
-            m.setTitle(module.getTitle());
-            return moduleRepository.save(m);
+            newModule.setCourse(course);
+            return moduleRepository.save(newModule);
         }
         return null;
     }
+
+    @DeleteMapping("/api/module/{mid}")
+    public void deleteModule(@PathVariable("mid") int mid) {
+        moduleRepository.deleteById(mid);
+    }
+
 
     @PutMapping("/api/module/{moduleId}")
     public Module updateModule(@PathVariable("moduleId") int moduleId, @RequestBody Module newModule) {
@@ -63,16 +67,10 @@ public class ModuleService {
             module.setId(newModule.getId());
             module.setTitle(newModule.getTitle());
             module.setCourse(newModule.getCourse());
+            System.out.println("Module: " + module);
             moduleRepository.save(module);
             return module;
         }
         return null;
     }
-
-
-    @DeleteMapping("/api/module/{mid}")
-    public void deleteModule(@PathVariable("mid") int mid) {
-        moduleRepository.deleteById(mid);
-    }
-
 }

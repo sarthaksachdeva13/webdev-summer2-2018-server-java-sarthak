@@ -20,30 +20,6 @@ public class Topic {
     @OneToMany(mappedBy="topic")
     private List<Widget> widgets;
 
-    @OneToMany(mappedBy="topic")
-    @JsonIgnore
-    private List<Exam> exams;
-
-    @OneToMany(mappedBy="topic")
-    @JsonIgnore
-    private List<Assignment> assignments;
-
-    public List<Exam> getExams() {
-        return exams;
-    }
-
-    public void setExams(List<Exam> exams) {
-        this.exams = exams;
-    }
-
-    public List<Assignment> getAssignments() {
-        return assignments;
-    }
-
-    public void setAssignments(List<Assignment> assignments) {
-        this.assignments = assignments;
-    }
-
     public int getId() {
         return id;
     }

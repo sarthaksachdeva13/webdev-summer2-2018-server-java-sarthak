@@ -1,11 +1,15 @@
 package wbdv.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Assignment extends Widget {
@@ -14,11 +18,9 @@ public class Assignment extends Widget {
     private String title;
     private String description;
     private String href;
-
     @ManyToOne
     @JsonIgnore
-    private Topic topic;
-
+    private Lesson lesson;
     @OneToMany
     @JsonIgnore
     private List<BaseExamQuestion> questions;
@@ -41,15 +43,12 @@ public class Assignment extends Widget {
     public void setDescription(String description) {
         this.description = description;
     }
-
-    public Topic getTopic() {
-        return topic;
+    public Lesson getLesson() {
+        return lesson;
     }
-
-    public void setTopic(Topic topic) {
-        this.topic = topic;
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
-
     public List<BaseExamQuestion> getQuestions() {
         return questions;
     }

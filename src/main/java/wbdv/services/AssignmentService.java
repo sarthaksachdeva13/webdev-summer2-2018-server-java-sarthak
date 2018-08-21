@@ -3,8 +3,10 @@ package wbdv.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import wbdv.models.Assignment;
+import wbdv.models.Lesson;
 import wbdv.models.Topic;
 import wbdv.repositories.AssignmentRepository;
+import wbdv.repositories.LessonRepository;
 import wbdv.repositories.TopicRepository;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.Optional;
 public class AssignmentService {
 
     @Autowired
-    TopicRepository topicRepository;
+    LessonRepository lessonRepository;
     @Autowired
     AssignmentRepository assignmentRepository;
 
@@ -27,25 +29,29 @@ public class AssignmentService {
     @GetMapping("/api/assignment/{aid}")
     public Assignment findAssignmentById(@PathVariable("aid") int assignmentId) {
         Optional<Assignment> optional = assignmentRepository.findById(assignmentId);
-        return optional.orElse(null);
-    }
-
-    @GetMapping("/api/topic/{tid}/assignment")
-    public List<Assignment> findAssignmentsByTopicId(@PathVariable("tid") int topicId) {
-        Optional<Topic> optional = topicRepository.findById(topicId);
         if (optional.isPresent()) {
-            Topic topic = optional.get();
-            return topic.getAssignments();
+            return optional.get();
         }
         return null;
     }
 
-    @PostMapping("/api/topic/{tid}/assignment")
-    public Assignment createNewAssignment(@PathVariable("tid") int topicId, @RequestBody Assignment newAssignment) {
-        Optional<Topic> optional = topicRepository.findById(topicId);
+    @GetMapping("/api/lesson/{lid}/assignment")
+    public List<Assignment> findAssignmentsByLessonId(@PathVariable("lid") int lessonId) {
+        Optional<Lesson> optional = lessonRepository.findById(lessonId);
         if (optional.isPresent()) {
-            Topic topic = optional.get();
-            newAssignment.setTopic(topic);
+            Lesson lesson = optional.get();
+            return lesson.getAssignments();
+        }
+        return null;
+    }
+
+    @PostMapping("/api/lesson/{lid}/assignment")
+    public Assignment createNewAssignment(@PathVariable("lid") int lessonId,
+                                          @RequestBody Assignment newAssignment) {
+        Optional<Lesson> optional = lessonRepository.findById(lessonId);
+        if (optional.isPresent()) {
+            Lesson lesson = optional.get();
+            newAssignment.setLesson(lesson);
             return newAssignment;
         }
         return null;

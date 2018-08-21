@@ -1,24 +1,30 @@
 package wbdv.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import wbdv.models.BaseExamQuestion;
-import wbdv.models.Exam;
-import wbdv.models.Topic;
-import wbdv.repositories.ExamRepository;
-import wbdv.repositories.TopicRepository;
-
 import java.util.List;
 import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import wbdv.models.Exam;
+import wbdv.models.Lesson;
+import wbdv.models.BaseExamQuestion;
+import wbdv.repositories.ExamRepository;
+import wbdv.repositories.LessonRepository;
 
 @RestController
 @CrossOrigin(origins = "*")
 public class ExamService {
-
     @Autowired
     ExamRepository examRepository;
     @Autowired
-    TopicRepository topicRepository;
+    LessonRepository lessonRepository;
 
     @GetMapping("/api/exam")
     public Iterable<Exam> findAllExams() {
@@ -28,27 +34,30 @@ public class ExamService {
     @GetMapping("/api/exam/{eid}")
     public Exam findExamById(@PathVariable("eid") int examId) {
         Optional<Exam> optional = examRepository.findById(examId);
-        return optional.orElse(null);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
     }
 
-    @GetMapping("api/topic/{tid}/exam")
-    public List<Exam> findExamsByTopicId(@PathVariable("tid") int topicId) {
-        Optional<Topic> optional = topicRepository.findById(topicId);
+    @GetMapping("api/lesson/{lid}/exam")
+    public List<Exam> findExamsByLessonId(@PathVariable("lid") int lessonId) {
+        Optional<Lesson> optional = lessonRepository.findById(lessonId);
         if (optional.isPresent()) {
-            Topic topic = optional.get();
-            return topic.getExams();
+            Lesson lesson = optional.get();
+            return lesson.getExams();
         }
 
         return null;
     }
 
-    @PostMapping("/api/topic/{tid}/exam")
-    public Exam createExam(@PathVariable("tid") int topicId,
+    @PostMapping("/api/lesson/{lid}/exam")
+    public Exam createExam(@PathVariable("lid") int lessonId,
                            @RequestBody Exam newExam) {
-        Optional<Topic> optional = topicRepository.findById(topicId);
+        Optional<Lesson> optional = lessonRepository.findById(lessonId);
         if (optional.isPresent()) {
-            Topic topic = optional.get();
-            newExam.setTopic(topic);
+            Lesson lesson = optional.get();
+            newExam.setLesson(lesson);
             return examRepository.save(newExam);
         }
         return null;

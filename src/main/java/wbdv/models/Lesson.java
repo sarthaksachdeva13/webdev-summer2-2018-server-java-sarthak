@@ -20,6 +20,41 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson")
     private List<Topic> topics;
 
+    @OneToMany(mappedBy="lesson")
+    @JsonIgnore
+    private List<Widget> widgets;
+
+    public List<Widget> getWidgets() {
+        return widgets;
+    }
+
+    public void setWidgets(List<Widget> widgets) {
+        this.widgets = widgets;
+    }
+
+    public List<Exam> getExams() {
+        return exams;
+    }
+
+    public void setExams(List<Exam> exams) {
+        this.exams = exams;
+    }
+
+    public List<Assignment> getAssignments() {
+        return assignments;
+    }
+
+    public void setAssignments(List<Assignment> assignments) {
+        this.assignments = assignments;
+    }
+
+    @OneToMany(mappedBy="lesson")
+    @JsonIgnore
+    private List<Exam> exams;
+    @OneToMany(mappedBy="lesson")
+    @JsonIgnore
+    private List<Assignment> assignments;
+
     public int getId() {
         return id;
     }

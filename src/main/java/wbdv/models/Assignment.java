@@ -14,9 +14,11 @@ public class Assignment extends Widget {
     private String title;
     private String description;
     private String href;
+
     @ManyToOne
     @JsonIgnore
     private Topic topic;
+
     @OneToMany
     @JsonIgnore
     private List<BaseExamQuestion> questions;

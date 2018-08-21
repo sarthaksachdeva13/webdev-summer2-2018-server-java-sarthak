@@ -30,8 +30,8 @@ public class AssignmentService {
         return optional.orElse(null);
     }
 
-    @GetMapping("/api/topic/{lid}/assignment")
-    public List<Assignment> findAssignmentsByTopicId(@PathVariable("lid") int topicId) {
+    @GetMapping("/api/topic/{tid}/assignment")
+    public List<Assignment> findAssignmentsByTopicId(@PathVariable("tid") int topicId) {
         Optional<Topic> optional = topicRepository.findById(topicId);
         if (optional.isPresent()) {
             Topic topic = optional.get();
@@ -40,8 +40,8 @@ public class AssignmentService {
         return null;
     }
 
-    @PostMapping("/api/topic/{lid}/assignment")
-    public Assignment createNewAssignment(@PathVariable("lid") int topicId, @RequestBody Assignment newAssignment) {
+    @PostMapping("/api/topic/{tid}/assignment")
+    public Assignment createNewAssignment(@PathVariable("tid") int topicId, @RequestBody Assignment newAssignment) {
         Optional<Topic> optional = topicRepository.findById(topicId);
         if (optional.isPresent()) {
             Topic topic = optional.get();
